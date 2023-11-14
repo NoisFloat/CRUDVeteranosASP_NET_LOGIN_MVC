@@ -1,0 +1,10 @@
+Ejecutar primero:
+La base de datos es para SQL SERVER
+--DDL
+--DML
+--Procedimientos Almacenados
+
+EJECUTAR EN ORDEN:
+1)DDL
+2)DML
+3)Procedimientos Almacenados

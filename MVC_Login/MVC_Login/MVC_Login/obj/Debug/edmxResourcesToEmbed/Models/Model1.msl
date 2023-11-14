@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DarwinGodModelStoreContainer" CdmEntityContainer="DarwinGodEntities10">
+    <EntitySetMapping Name="DonativosAlimentacions">
+      <EntityTypeMapping TypeName="DarwinGodModel.DonativosAlimentacion">
+        <MappingFragment StoreEntitySet="DonativosAlimentacion">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Donativo" ColumnName="Donativo" />
+          <ScalarProperty Name="correocomo_fk" ColumnName="correocomo_fk" />
+          <ScalarProperty Name="fecha_donativo" ColumnName="fecha_donativo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DonativosDineroes">
+      <EntityTypeMapping TypeName="DarwinGodModel.DonativosDinero">
+        <MappingFragment StoreEntitySet="DonativosDinero">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Donativo" ColumnName="Donativo" />
+          <ScalarProperty Name="correocomo_fk" ColumnName="correocomo_fk" />
+          <ScalarProperty Name="fecha_donativo" ColumnName="fecha_donativo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DonativosProductosPersonales">
+      <EntityTypeMapping TypeName="DarwinGodModel.DonativosProductosPersonale">
+        <MappingFragment StoreEntitySet="DonativosProductosPersonales">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Donativo" ColumnName="Donativo" />
+          <ScalarProperty Name="correocomo_fk" ColumnName="correocomo_fk" />
+          <ScalarProperty Name="fecha_donativo" ColumnName="fecha_donativo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles_Usuario">
+      <EntityTypeMapping TypeName="DarwinGodModel.Roles_Usuario">
+        <MappingFragment StoreEntitySet="Roles_Usuario">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="DarwinGodModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="nombres" ColumnName="nombres" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <ScalarProperty Name="password_usuario" ColumnName="password_usuario" />
+          <ScalarProperty Name="direccion_residencia" ColumnName="direccion_residencia" />
+          <ScalarProperty Name="estado_extranjero" ColumnName="estado_extranjero" />
+          <ScalarProperty Name="RolUsuario_fk" ColumnName="RolUsuario_fk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarInformacioUsuario" FunctionName="DarwinGodModel.Store.ConsultarInformacioUsuario">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DarwinGodModel.ConsultarInformacioUsuario_Result">
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="nombres" ColumnName="nombres" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <ScalarProperty Name="password_usuario" ColumnName="password_usuario" />
+          <ScalarProperty Name="direccion_residencia" ColumnName="direccion_residencia" />
+          <ScalarProperty Name="estado_extranjero" ColumnName="estado_extranjero" />
+          <ScalarProperty Name="RolUsuario_fk" ColumnName="RolUsuario_fk" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarUsuariosConDonativos" FunctionName="DarwinGodModel.Store.ConsultarUsuariosConDonativos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DarwinGodModel.ConsultarUsuariosConDonativos_Result">
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="nombres" ColumnName="nombres" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <ScalarProperty Name="password_usuario" ColumnName="password_usuario" />
+          <ScalarProperty Name="direccion_residencia" ColumnName="direccion_residencia" />
+          <ScalarProperty Name="estado_extranjero" ColumnName="estado_extranjero" />
+          <ScalarProperty Name="RolUsuario_fk" ColumnName="RolUsuario_fk" />
+          <ScalarProperty Name="DonativoProductosPersonales" ColumnName="DonativoProductosPersonales" />
+          <ScalarProperty Name="DonativoDinero" ColumnName="DonativoDinero" />
+          <ScalarProperty Name="DonativoAlimentacion" ColumnName="DonativoAlimentacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EliminarUsuarioYDonativos" FunctionName="DarwinGodModel.Store.EliminarUsuarioYDonativos" />
+    <FunctionImportMapping FunctionImportName="ObtenerDonativosPorCorreoTodosLosBeneficios" FunctionName="DarwinGodModel.Store.ObtenerDonativosPorCorreoTodosLosBeneficios">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DarwinGodModel.ObtenerDonativosPorCorreoTodosLosBeneficios_Result">
+          <ScalarProperty Name="UsuarioCorreo" ColumnName="UsuarioCorreo" />
+          <ScalarProperty Name="TipoDonativo" ColumnName="TipoDonativo" />
+          <ScalarProperty Name="Donativo" ColumnName="Donativo" />
+          <ScalarProperty Name="UsuarioNombres" ColumnName="UsuarioNombres" />
+          <ScalarProperty Name="UsuarioApellidos" ColumnName="UsuarioApellidos" />
+          <ScalarProperty Name="FechaDonativo" ColumnName="FechaDonativo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ObtenerDonativosPorCorreoTodosLosBeneficiosFechaMasReciente" FunctionName="DarwinGodModel.Store.ObtenerDonativosPorCorreoTodosLosBeneficiosFechaMasReciente">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DarwinGodModel.ObtenerDonativosPorCorreoTodosLosBeneficiosFechaMasReciente_Result">
+          <ScalarProperty Name="UsuarioCorreo" ColumnName="UsuarioCorreo" />
+          <ScalarProperty Name="TipoDonativo" ColumnName="TipoDonativo" />
+          <ScalarProperty Name="Donativo" ColumnName="Donativo" />
+          <ScalarProperty Name="UsuarioNombres" ColumnName="UsuarioNombres" />
+          <ScalarProperty Name="UsuarioApellidos" ColumnName="UsuarioApellidos" />
+          <ScalarProperty Name="FechaDonativo" ColumnName="FechaDonativo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ObtenerUsuarioPorCorreoYPassword" FunctionName="DarwinGodModel.Store.ObtenerUsuarioPorCorreoYPassword">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DarwinGodModel.ObtenerUsuarioPorCorreoYPassword_Result">
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="RolUsuario" ColumnName="RolUsuario" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_ActualizarUsuario" FunctionName="DarwinGodModel.Store.sp_ActualizarUsuario" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DarwinGodModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="DonativosAlimentacion">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Donativo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="correocomo_fk" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="fecha_donativo" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DonativosDinero">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Donativo" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="correocomo_fk" Type="varchar" MaxLength="100" />
+    <Property Name="fecha_donativo" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DonativosProductosPersonales">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Donativo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="correocomo_fk" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="fecha_donativo" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles_Usuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_rol" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="correo" />
+    </Key>
+    <Property Name="correo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="nombres" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellidos" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password_usuario" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="direccion_residencia" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="estado_extranjero" Type="bit" Nullable="false" />
+    <Property Name="RolUsuario_fk" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Donativos__corre__3D5E1FD2">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DonativosDinero" Type="Self.DonativosDinero" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="correo" />
+      </Principal>
+      <Dependent Role="DonativosDinero">
+        <PropertyRef Name="correocomo_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Donativos__corre__403A8C7D">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DonativosAlimentacion" Type="Self.DonativosAlimentacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="correo" />
+      </Principal>
+      <Dependent Role="DonativosAlimentacion">
+        <PropertyRef Name="correocomo_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Donativos__corre__4316F928">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DonativosProductosPersonales" Type="Self.DonativosProductosPersonales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="correo" />
+      </Principal>
+      <Dependent Role="DonativosProductosPersonales">
+        <PropertyRef Name="correocomo_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuarios__RolUsu__398D8EEE">
+    <End Role="Roles_Usuario" Type="Self.Roles_Usuario" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles_Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="RolUsuario_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="ConsultarInformacioUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="correo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="ConsultarUsuariosConDonativos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="EliminarUsuarioYDonativos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="correoUsuario" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="ObtenerDonativosPorCorreoTodosLosBeneficios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="correoUsuario" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="ObtenerDonativosPorCorreoTodosLosBeneficiosFechaMasReciente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="correoUsuario" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="ObtenerUsuarioPorCorreoYPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="correo" Type="varchar" Mode="In" />
+    <Parameter Name="password" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_ActualizarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="correo" Type="varchar" Mode="In" />
+    <Parameter Name="nombres" Type="varchar" Mode="In" />
+    <Parameter Name="apellidos" Type="varchar" Mode="In" />
+    <Parameter Name="password_usuario" Type="varchar" Mode="In" />
+    <Parameter Name="direccion_residencia" Type="varchar" Mode="In" />
+    <Parameter Name="estado_extranjero" Type="bit" Mode="In" />
+  </Function>
+  <EntityContainer Name="DarwinGodModelStoreContainer">
+    <EntitySet Name="DonativosAlimentacion" EntityType="Self.DonativosAlimentacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DonativosDinero" EntityType="Self.DonativosDinero" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DonativosProductosPersonales" EntityType="Self.DonativosProductosPersonales" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles_Usuario" EntityType="Self.Roles_Usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Donativos__corre__3D5E1FD2" Association="Self.FK__Donativos__corre__3D5E1FD2">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="DonativosDinero" EntitySet="DonativosDinero" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Donativos__corre__403A8C7D" Association="Self.FK__Donativos__corre__403A8C7D">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="DonativosAlimentacion" EntitySet="DonativosAlimentacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Donativos__corre__4316F928" Association="Self.FK__Donativos__corre__4316F928">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="DonativosProductosPersonales" EntitySet="DonativosProductosPersonales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuarios__RolUsu__398D8EEE" Association="Self.FK__Usuarios__RolUsu__398D8EEE">
+      <End Role="Roles_Usuario" EntitySet="Roles_Usuario" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

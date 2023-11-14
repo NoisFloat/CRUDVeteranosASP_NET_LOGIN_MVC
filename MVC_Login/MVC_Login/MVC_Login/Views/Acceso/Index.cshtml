@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Iniciar Sesión";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <div class="login-container p-4">
+
+                <h1 class="text-center mb-4">Veteranos de Guerra</h1>
+                <p class="text-center mb-4">Bienvenido a Hiten Mitsurugi-Ryu. Inicia sesión para continuar.</p>
+
+                @using (Html.BeginForm("Login", "Acceso", FormMethod.Post, new { @class = "row g-3", role = "form" }))
+                {
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label for="email" class="visually-hidden">Usuario</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope-fill fs-5"></i></span>
+                                @Html.TextBox("email", null, new { @class = "form-control", placeholder = "Usuario", id = "email" })
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="visually-hidden">Contraseña</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock-fill fs-5"></i></span>
+                                @Html.Password("password", null, new { @class = "form-control", placeholder = "Contraseña", id = "password" })
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block mb-3">Iniciar Sesión</button>
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    </div>
+                }
+                <div class="text-center mb-4">
+                    <img src="https://pre00.deviantart.net/9c5b/th/pre/f/2017/332/4/4/44d0aeb838e218fa69ec96722a4b7e5f-da27h84.jpg" alt="Logo de Hiten Mitsurugi-Ryu" class="img-fluid smaller-image">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6 d-none d-md-block">
+            <div class="image-container">
+                <img src="https://i.pinimg.com/originals/b2/8e/fc/b28efc08e11939c3ae1352e6476d97df.jpg" alt="Imagen 2" style="height:90%" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>

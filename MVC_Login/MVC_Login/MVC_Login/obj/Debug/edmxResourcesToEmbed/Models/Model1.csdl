@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DarwinGodModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DonativosAlimentacion">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Donativo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="correocomo_fk" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha_donativo" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Donativos__corre__403A8C7D" FromRole="DonativosAlimentacion" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="DonativosDinero">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Donativo" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="correocomo_fk" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_donativo" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Donativos__corre__3D5E1FD2" FromRole="DonativosDinero" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="DonativosProductosPersonale">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Donativo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="correocomo_fk" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha_donativo" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Donativos__corre__4316F928" FromRole="DonativosProductosPersonales" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Roles_Usuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__RolUsu__398D8EEE" FromRole="Roles_Usuario" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="correo" />
+    </Key>
+    <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="direccion_residencia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado_extranjero" Type="Boolean" Nullable="false" />
+    <Property Name="RolUsuario_fk" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DonativosAlimentacions" Relationship="Self.FK__Donativos__corre__403A8C7D" FromRole="Usuarios" ToRole="DonativosAlimentacion" />
+    <NavigationProperty Name="DonativosDineroes" Relationship="Self.FK__Donativos__corre__3D5E1FD2" FromRole="Usuarios" ToRole="DonativosDinero" />
+    <NavigationProperty Name="DonativosProductosPersonales" Relationship="Self.FK__Donativos__corre__4316F928" FromRole="Usuarios" ToRole="DonativosProductosPersonales" />
+    <NavigationProperty Name="Roles_Usuario" Relationship="Self.FK__Usuarios__RolUsu__398D8EEE" FromRole="Usuarios" ToRole="Roles_Usuario" />
+  </EntityType>
+  <Association Name="FK__Donativos__corre__403A8C7D">
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DonativosAlimentacion" Type="Self.DonativosAlimentacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="correo" />
+      </Principal>
+      <Dependent Role="DonativosAlimentacion">
+        <PropertyRef Name="correocomo_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Donativos__corre__3D5E1FD2">
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DonativosDinero" Type="Self.DonativosDinero" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="correo" />
+      </Principal>
+      <Dependent Role="DonativosDinero">
+        <PropertyRef Name="correocomo_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Donativos__corre__4316F928">
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DonativosProductosPersonales" Type="Self.DonativosProductosPersonale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="correo" />
+      </Principal>
+      <Dependent Role="DonativosProductosPersonales">
+        <PropertyRef Name="correocomo_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuarios__RolUsu__398D8EEE">
+    <End Role="Roles_Usuario" Type="Self.Roles_Usuario" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles_Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="RolUsuario_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DarwinGodEntities10" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DonativosAlimentacions" EntityType="Self.DonativosAlimentacion" />
+    <EntitySet Name="DonativosDineroes" EntityType="Self.DonativosDinero" />
+    <EntitySet Name="DonativosProductosPersonales" EntityType="Self.DonativosProductosPersonale" />
+    <EntitySet Name="Roles_Usuario" EntityType="Self.Roles_Usuario" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+    <AssociationSet Name="FK__Donativos__corre__403A8C7D" Association="Self.FK__Donativos__corre__403A8C7D">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="DonativosAlimentacion" EntitySet="DonativosAlimentacions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Donativos__corre__3D5E1FD2" Association="Self.FK__Donativos__corre__3D5E1FD2">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="DonativosDinero" EntitySet="DonativosDineroes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Donativos__corre__4316F928" Association="Self.FK__Donativos__corre__4316F928">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="DonativosProductosPersonales" EntitySet="DonativosProductosPersonales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuarios__RolUsu__398D8EEE" Association="Self.FK__Usuarios__RolUsu__398D8EEE">
+      <End Role="Roles_Usuario" EntitySet="Roles_Usuario" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <FunctionImport Name="ConsultarInformacioUsuario" ReturnType="Collection(DarwinGodModel.ConsultarInformacioUsuario_Result)">
+      <Parameter Name="correo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarUsuariosConDonativos" ReturnType="Collection(DarwinGodModel.ConsultarUsuariosConDonativos_Result)" />
+    <FunctionImport Name="EliminarUsuarioYDonativos">
+      <Parameter Name="correoUsuario" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ObtenerDonativosPorCorreoTodosLosBeneficios" ReturnType="Collection(DarwinGodModel.ObtenerDonativosPorCorreoTodosLosBeneficios_Result)">
+      <Parameter Name="correoUsuario" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ObtenerDonativosPorCorreoTodosLosBeneficiosFechaMasReciente" ReturnType="Collection(DarwinGodModel.ObtenerDonativosPorCorreoTodosLosBeneficiosFechaMasReciente_Result)">
+      <Parameter Name="correoUsuario" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ObtenerUsuarioPorCorreoYPassword" ReturnType="Collection(DarwinGodModel.ObtenerUsuarioPorCorreoYPassword_Result)">
+      <Parameter Name="correo" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ActualizarUsuario">
+      <Parameter Name="correo" Mode="In" Type="String" />
+      <Parameter Name="nombres" Mode="In" Type="String" />
+      <Parameter Name="apellidos" Mode="In" Type="String" />
+      <Parameter Name="password_usuario" Mode="In" Type="String" />
+      <Parameter Name="direccion_residencia" Mode="In" Type="String" />
+      <Parameter Name="estado_extranjero" Mode="In" Type="Boolean" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="ConsultarInformacioUsuario_Result">
+    <Property Type="String" Name="correo" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="nombres" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="apellidos" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="password_usuario" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="direccion_residencia" Nullable="false" MaxLength="200" />
+    <Property Type="Boolean" Name="estado_extranjero" Nullable="false" />
+    <Property Type="Int32" Name="RolUsuario_fk" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ConsultarUsuariosConDonativos_Result">
+    <Property Type="String" Name="correo" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="nombres" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="apellidos" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="password_usuario" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="direccion_residencia" Nullable="false" MaxLength="200" />
+    <Property Type="Boolean" Name="estado_extranjero" Nullable="false" />
+    <Property Type="Int32" Name="RolUsuario_fk" Nullable="false" />
+    <Property Type="String" Name="DonativoProductosPersonales" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="DonativoDinero" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="String" Name="DonativoAlimentacion" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ObtenerDonativosPorCorreoTodosLosBeneficios_Result">
+    <Property Type="String" Name="UsuarioCorreo" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="TipoDonativo" Nullable="false" MaxLength="24" />
+    <Property Type="String" Name="Donativo" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="UsuarioNombres" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="UsuarioApellidos" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="FechaDonativo" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ObtenerDonativosPorCorreoTodosLosBeneficiosFechaMasReciente_Result">
+    <Property Type="String" Name="UsuarioCorreo" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="TipoDonativo" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Donativo" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="UsuarioNombres" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="UsuarioApellidos" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="FechaDonativo" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="ObtenerUsuarioPorCorreoYPassword_Result">
+    <Property Type="String" Name="Correo" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="RolUsuario" Nullable="true" />
+  </ComplexType>
+</Schema>

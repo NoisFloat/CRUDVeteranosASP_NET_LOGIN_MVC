@@ -1,0 +1,58 @@
+﻿@model List<MVC_Login.Models.ObtenerDonativosPorCorreoTodosLosBeneficiosFechaMasReciente_Result>
+
+@{
+    ViewBag.Title = "Beneficios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="container py-5" style="background-color: #f8f9fa;">
+    
+        <h2 class="mb-4">@ViewBag.Title</h2>
+        <h3 class="mb-3">@ViewBag.Message</h3>
+     
+
+
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                @if (Model != null && Model.Any())
+                {
+                    var primerDonativo = Model[0];
+                    <h1 class="text-secondary">Bienvenido Veterano @primerDonativo.UsuarioNombres @primerDonativo.UsuarioApellidos</h1>
+                    <p class="fs-5">¡Gracias por unirte a nosotros y por tu interés en apoyar nuestro servicio! Tu respaldo significa mucho para nosotros mientras trabajamos para brindar un servicio excepcional...</p>
+                    <p class="fs-5 col-md-8">Cada contribución, independientemente de su tamaño, marca la diferencia y fortalece nuestra comunidad. Apreciamos tu consideración y apoyo continuo. Juntos, podemos seguir haciendo una diferencia significativa. Descarga nuestras guías y recursos para conocer más sobre nuestra labor y cómo puedes contribuir. ¡Gracias por ser parte de este viaje con nosotros!</p>
+                }
+                else
+                {
+                    <h1 class="text-secondary">Bienvenido Veterano</h1>
+                    <p class="fs-5">¡Gracias por unirte a nosotros y por tu interés en apoyar nuestro servicio!</p>
+                }
+            </div>
+
+            <div class="col-md-6">
+                <div class="card mx-auto">
+                    <div class="card-body text-center">
+                        <h2 class="text-primary">Último donativo</h2>
+
+                        @if (Model != null && Model.Any())
+                        {
+                            var ultimoDonativo = Model[0];
+                            <div>
+                                <p><strong>Usuario:</strong> @ultimoDonativo.UsuarioNombres @ultimoDonativo.UsuarioApellidos</p>
+                                <p><strong>Tipo de donativo:</strong> @ultimoDonativo.TipoDonativo</p>
+                                <p><strong>Donativo:</strong> @ultimoDonativo.Donativo</p>
+                                <p><strong>Fecha del donativo:</strong> @ultimoDonativo.FechaDonativo</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <p>No hay donativos registrados.</p>
+                        }
+
+                        <div class="mb-5">
+                            <a href="@Url.Action("TusBeneficios", "Home")" class="btn btn-primary btn-lg px-4">Ve tu historial de beneficios</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>

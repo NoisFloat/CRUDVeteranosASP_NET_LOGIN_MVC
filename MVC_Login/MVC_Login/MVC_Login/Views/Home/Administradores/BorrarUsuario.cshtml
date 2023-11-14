@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "BorrarUsuario";
+}
+
+<h2>Borrar Usuario</h2>
+@{
+    bool isLoggedAdmin = HttpContext.Current.Session["Sesion1"] != null;
+}
+@if (isLoggedAdmin)
+{
+    using (Html.BeginForm("BorrarUsuarioPost", "Home", FormMethod.Post, new { @class = "row g-3", role = "form" }))
+    {
+        <div class="col-md-12">
+            <div class="mb-3">
+                <label for="email" class="visually-hidden">Usuario</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope-fill fs-5"></i></span>
+                    @Html.TextBox("correo", null, new { @class = "form-control", placeholder = "Correo del usuario a borrar", id = "correo" })
+                </div>
+            </div>
+
+
+            <button type="submit" class="btn btn-danger btn-block mb-3">Borrar Usuario</button>
+            <p style="color: red;">@ViewBag.ErrorMessage</p>
+
+        </div>
+    }
+}
+else
+{<h1>No deberias de estar viendo esto</h1>
+}

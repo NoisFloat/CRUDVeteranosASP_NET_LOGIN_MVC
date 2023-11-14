@@ -1,0 +1,3 @@
+Para tener la base de datos lista solamente necesitas ejecutar el script:
+
+ScriptCompletoF5.sql

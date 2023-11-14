@@ -1,0 +1,50 @@
+﻿@{
+    bool isLoggedAdmin = HttpContext.Current.Session["Sesion1"] != null;
+}
+@if (isLoggedAdmin)
+{
+    using (Html.BeginForm("ActualizarUsuarioPost", "Home", FormMethod.Post, new { @class = "row g-3", role = "form" }))
+    {
+
+        <div class="col-md-12">
+            <div class="mb-3">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope-fill fs-5"></i></span>
+                    @Html.TextBox("correo", null, new { @class = "form-control", placeholder = "Correo del usuario a actualizar", id = "correo" })
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope-fill fs-5"></i></span>
+                    @Html.TextBox("nombres", null, new { @class = "form-control", placeholder = "Nombres del usuario", id = "nombres" })
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope-fill fs-5"></i></span>
+                    @Html.TextBox("apellidos", null, new { @class = "form-control", placeholder = "Apellidos del usuario", id = "apellidos" })
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock-fill fs-5"></i></span>
+                    @Html.Password("password_usuario", null, new { @class = "form-control", placeholder = "Contraseña del usuario", id = "password_usuario" })
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope-fill fs-5"></i></span>
+                    @Html.TextBox("direccion_residencia", null, new { @class = "form-control", placeholder = "Dirección de residencia del usuario", id = "direccion_residencia" })
+                </div>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        @Html.CheckBox("estado_extranjero", new { @class = "bi bi-envelope-fill fs-5", id = "estado_extranjero" })
+                    </div>
+
+                    <label class="form-check-label" for="estado_extranjero">Estado en el extranjero del usuario</label>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-danger btn-block mb-3">Actualizar Usuario</button>
+            <p style="color: red;">@ViewBag.ErrorMessage</p>
+
+        </div>
+
+    }
+}
+else
+{ <h1>No deberias de estar viendo esto</h1>
+}

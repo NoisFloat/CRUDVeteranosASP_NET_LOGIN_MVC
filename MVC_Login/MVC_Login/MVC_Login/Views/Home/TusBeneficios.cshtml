@@ -1,0 +1,63 @@
+﻿@model List<MVC_Login.Models.ObtenerDonativosPorCorreoTodosLosBeneficios_Result>
+
+@{
+    ViewBag.Title = "Tu historial de beneficios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<main>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Donativo</th>
+                        <th>Detalle Donativo</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Fechas de donativos</th>
+                        <!-- Agrega más encabezados según sea necesario -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var beneficio in Model)
+                    {
+                        <tr>
+                            <td>@beneficio.UsuarioCorreo</td>
+                            <td>@beneficio.TipoDonativo</td>
+                            <td>@beneficio.Donativo</td>
+                            <td>@beneficio.UsuarioNombres</td>
+                            <td>@beneficio.UsuarioApellidos</td>
+                            <td>@beneficio.FechaDonativo.ToString("dd/MM/yyyy")</td>
+                            <!-- Agrega más celdas según sea necesario -->
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info" role="alert">
+            No hay beneficios disponibles.
+        </div>
+    }
+
+    <address class="mt-4">
+        <p>
+            One Microsoft Way<br />
+            Redmond, WA 98052-6399<br />
+            <abbr title="Phone">P:</abbr> 425.555.0100
+        </p>
+    </address>
+
+    <address class="mt-4">
+        <p>
+            <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+            <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+        </p>
+    </address>
+</main>

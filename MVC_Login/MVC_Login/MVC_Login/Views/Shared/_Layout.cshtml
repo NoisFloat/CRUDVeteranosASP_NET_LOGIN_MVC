@@ -1,0 +1,59 @@
+﻿@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+<style>
+    /* Agrega este estilo para el enlace "Cerrar Sesión" */
+    .nav-link-logout {
+        color: red !important;
+    }
+</style>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <!-- Cambia el nombre de la aplicación y elimina la funcionalidad del enlace -->
+            <span class="navbar-brand">@Html.ActionLink("Hiten Mitsurugi-Ryu", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</span>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @{
+                // Verificar si hay una sesión activa
+                bool isLoggedIn = HttpContext.Current.Session["Sesion1"] !=null|| HttpContext.Current.Session["Sesion2"] != null;
+              //  bool isLoggedAdmin = HttpContext.Current.Session["Sesion1"] != null;
+            }
+
+            @if (isLoggedIn)
+            {
+                @isLoggedIn.ToString();
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Tus Beneficios", "TusBeneficios", "Home", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                       
+                        <li class="nav-item">
+                            @Html.ActionLink("Panel De Control", "PanelDeControlGet", "Home", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        
+                    </ul>
+                    <!-- Mueve el botón "Cerrar Sesión" a la esquina derecha -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            @Html.ActionLink("Cerrar Sesión", "LogOut", "Acceso", new { area = "" }, new { @class = "nav-link nav-link-logout" })
+                        </li>
+                    </ul>
+                </div>
+            }
+
+        </div>
+    </nav>
+    <div class="container mt-4">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
